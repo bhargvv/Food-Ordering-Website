@@ -5,54 +5,55 @@ import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 //placing user order form frontend
-const placeOrder= async(req,resp)=>{
+const placeOrder = async (req, resp) => {
 
-        const frontend_url = "http://localhost:5173";
+  // Use the origin of the request (the frontend calling this API) so Stripe redirects properly
+  const frontend_url = req.headers.origin || "http://localhost:5174";
 
-    try {
-        const neworder= new orderModel({
-            userId: req.userId,
-            items: req.body.items,
-            amount: req.body.amount,
-            address: req.body.address,
-        })
-        await neworder.save();
+  try {
+    const neworder = new orderModel({
+      userId: req.userId,
+      items: req.body.items,
+      amount: req.body.amount,
+      address: req.body.address,
+    })
+    await neworder.save();
 
-        const line_items = req.body.items.map((item)=>({
-            price_data:{
-                currency:"inr",
-                product_data:{
-                    name:item.name,
-                },
-                unit_amount: Math.round(item.price * 91.59 * 100)
-            },
-            quantity:item.quantity,
-        }))
+    const line_items = req.body.items.map((item) => ({
+      price_data: {
+        currency: "inr",
+        product_data: {
+          name: item.name,
+        },
+        unit_amount: Math.round(item.price * 91.59 * 100)
+      },
+      quantity: item.quantity,
+    }))
 
-        line_items.push({
-            price_data:{
-                currency:"inr",
-                product_data:{
-                    name:"Delivery Charges"
-                },
-                unit_amount: Math.round(2 * 91.59 * 100)
-            },
-            quantity:1
-        })
+    line_items.push({
+      price_data: {
+        currency: "inr",
+        product_data: {
+          name: "Delivery Charges"
+        },
+        unit_amount: Math.round(2 * 91.59 * 100)
+      },
+      quantity: 1
+    })
 
-        const session = await stripe.checkout.sessions.create({
-            line_items: line_items,
-            mode:"payment",
-            success_url:`${frontend_url}/verify?success=true&orderId=${neworder._id}`,
-            cancel_url:`${frontend_url}/verify?success=false&orderId=${neworder._id}`,
-        })
+    const session = await stripe.checkout.sessions.create({
+      line_items: line_items,
+      mode: "payment",
+      success_url: `${frontend_url}/verify?success=true&orderId=${neworder._id}`,
+      cancel_url: `${frontend_url}/verify?success=false&orderId=${neworder._id}`,
+    })
 
-        resp.json({success:true,message:"Order Placed Successfully",session_url:session.url});
+    resp.json({ success: true, message: "Order Placed Successfully", session_url: session.url });
 
-    } catch (error) {
-        console.log(error);
-        resp.json({success:false,message:"Error in placing order"})
-    }
+  } catch (error) {
+    console.log(error);
+    resp.json({ success: false, message: "Error in placing order" })
+  }
 }
 // const verifyOrder= async(req,resp)=>{
 //     const {orderId,success}= req.body;
@@ -106,36 +107,36 @@ const verifyOrder = async (req, res) => {
 };
 
 // users order for frontend
-const userOrders= async(req,resp)=>{
+const userOrders = async (req, resp) => {
   try {
-    const orders=await orderModel.find({userId:req.userId});
-    resp.json({success:true,data:orders});
+    const orders = await orderModel.find({ userId: req.userId });
+    resp.json({ success: true, data: orders });
   } catch (error) {
     console.log(error);
-    resp.json({success:false,message:"Error in fetching user orders"})
+    resp.json({ success: false, message: "Error in fetching user orders" })
   }
 }
 
 //Listing orders for admin panel
-const listOrders= async(req,resp)=>{
+const listOrders = async (req, resp) => {
   try {
-    const orders= await orderModel.find({});
-    resp.json({success:true,data:orders});
+    const orders = await orderModel.find({});
+    resp.json({ success: true, data: orders });
   } catch (error) {
     console.log(error);
-    resp.json({success:false,message:"Error in listing orders"})
+    resp.json({ success: false, message: "Error in listing orders" })
   }
 }
 
 //Api for updating order status
-const updateStatus = async(req,resp)=>{
+const updateStatus = async (req, resp) => {
   try {
-    await orderModel.findByIdAndUpdate(req.body.orderId,{status:req.body.status});
-    resp.json({success:true,message:"Order status updated successfully"});
+    await orderModel.findByIdAndUpdate(req.body.orderId, { status: req.body.status });
+    resp.json({ success: true, message: "Order status updated successfully" });
   } catch (error) {
     console.log(error);
-    resp.json({success:false,message:"Error in updating order status"})
+    resp.json({ success: false, message: "Error in updating order status" })
   }
 }
 
-export {placeOrder,verifyOrder,userOrders,listOrders,updateStatus};
+export { placeOrder, verifyOrder, userOrders, listOrders, updateStatus };
