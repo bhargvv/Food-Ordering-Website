@@ -1,29 +1,82 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-*{
+:root {
+  --bg-color: #050505;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --accent-gradient: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+  --accent-color: #ff4b2b;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(10, 10, 10, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --shadow-accent: 0 8px 32px rgba(255, 75, 43, 0.25);
+  --shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Outfit;
+  font-family: 'Outfit', sans-serif;
   scroll-behavior: smooth;
 }
 
-body{
+body {
   min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  /* Optional: subtle background pattern or radial gradient */
+  background-image: radial-gradient(circle at top right, rgba(255, 65, 108, 0.08) 0%, transparent 40%),
+                    radial-gradient(circle at bottom left, rgba(255, 75, 43, 0.05) 0%, transparent 40%);
+  background-attachment: fixed;
 }
-a{
+
+a {
   text-decoration: none;
   color: inherit;
+  transition: color var(--transition-fast);
 }
-.app{
-  width: 80%;
+
+.app {
+  width: 85%;
+  max-width: 1400px;
   margin: auto;
+  padding-top: 100px; /* Space for fixed navbar */
 }
+
+/* Base button styles to be reused */
+.btn-primary {
+  background: var(--accent-gradient);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+  box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-accent);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
 @keyframes fadeIn {
-  from{
+  from {
     opacity: 0;
+    transform: translateY(10px);
   }
-  to{
+  to {
     opacity: 1;
+    transform: translateY(0);
   }
 }

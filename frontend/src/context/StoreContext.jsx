@@ -9,6 +9,7 @@ const StoreContextProvider = (props) => {
     const url = "http://localhost:4000"
     const [token, setToken] = useState("");
     const [food_list, setFoodList] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
 
     const addToCart = async (itemId) => {
         if (!cartItems[itemId]) {
@@ -22,9 +23,9 @@ const StoreContextProvider = (props) => {
         }
     }
 
-    const removeFromCart =async (itemId) => {
+    const removeFromCart = async (itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }))
-         if (token) {
+        if (token) {
             await axios.post(url + "/api/cart/remove", { itemId }, { headers: { token } })
         }
     }
@@ -45,8 +46,8 @@ const StoreContextProvider = (props) => {
         setFoodList(response.data.data)
     }
 
-    const loadCartData = async (userToken)=>{
-        const response = await axios.get(url + "/api/cart/get",{ headers: { token: userToken } })
+    const loadCartData = async (userToken) => {
+        const response = await axios.get(url + "/api/cart/get", { headers: { token: userToken } })
         setCartItems(response.data.cartData || {});
     }
 
@@ -74,7 +75,8 @@ const StoreContextProvider = (props) => {
         url,
         token,
         setToken,
-        setShowLogin,showLogin
+        setShowLogin, showLogin,
+        searchQuery, setSearchQuery
     }
     return (
         <StoreContext.Provider value={contextValue}>

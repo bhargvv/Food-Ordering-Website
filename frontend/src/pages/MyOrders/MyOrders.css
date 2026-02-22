@@ -1,47 +1,79 @@
-.my-orders{
+.my-orders {
     margin: 50px 0px;
+    animation: fadeIn 0.5s var(--transition-smooth);
 }
-.my-orders .container{
+
+.my-orders h2 {
+    color: var(--text-primary);
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.my-orders .container {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-.my-orders-order{
+
+.my-orders-order {
     display: grid;
     grid-template-columns: 0.5fr 2fr 1fr 1fr 2fr 1fr;
     align-items: center;
-    padding: 10px 20px;
+    padding: 15px 25px;
     gap: 30px;
     font-size: 14px;
-    color: #454545;
-    border: 1px solid tomato;
-}
-.my-orders-order img{
-    width: 50px;
-}
-.my-orders-order p span{
-    color: tomato;
-}
-.my-orders-order p b{
-    font-weight: 500;
-    color: #454545;
-}
-.my-orders-order button{
-    border: none;
-    padding: 12px 0px;
-    border-radius: 4px;
-    background-color: #ffe1e1;
-    cursor: pointer;
-    color: #454545;
+    color: var(--text-secondary);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    transition: var(--transition-smooth);
 }
 
-@media(max-width:900px){
-    .my-orders-order{
+.my-orders-order:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 75, 43, 0.2);
+}
+
+.my-orders-order img {
+    width: 50px;
+    border-radius: 8px;
+}
+
+.my-orders-order p span {
+    color: var(--accent-color);
+}
+
+.my-orders-order p b {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.my-orders-order button {
+    border: none;
+    padding: 12px 0px;
+    border-radius: 8px;
+    background: rgba(255, 75, 43, 0.15);
+    color: var(--accent-color);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+.my-orders-order button:hover {
+    background: var(--accent-gradient);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
+}
+
+@media(max-width: 900px) {
+    .my-orders-order {
         grid-template-columns: 1fr 2fr 1fr;
-        row-gap: 5px;
+        row-gap: 15px;
         font-size: 12px;
     }
-    .my-orders-order button{
-        font-size: 10px;
+
+    .my-orders-order button {
+        font-size: 12px;
+        padding: 10px;
     }
 }

@@ -1,9 +1,23 @@
 .header {
-    height: 34vw;
+    height: 38vw;
     margin: 30px auto;
-    background: url('/header_img.png') no-repeat;
-    background-size: contain;
+    background: url('/header_img.png') center/cover no-repeat;
     position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: var(--shadow-dark);
+}
+
+/* Add a beautiful gradient overlay so text is readable over the image */
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(5, 5, 5, 0.9) 0%, rgba(5, 5, 5, 0.4) 50%, rgba(5, 5, 5, 0.1) 100%);
+    z-index: 1;
 }
 
 .header-contents {
@@ -11,49 +25,61 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    gap: 1.5vw;
-    max-width: 50%;
-    bottom: 10%;
+    gap: 2vw;
+    max-width: 55%;
+    bottom: 15%;
     left: 6vw;
-    animation: fadeIn 3s;
+    z-index: 2;
+    /* Ensure text is above the overlay */
+    animation: fadeIn 1.5s var(--transition-smooth);
 }
 
 .header-contents h2 {
-    font-weight: 500;
-    color: white;
-    font-size: max(4.5vw, 22px);
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: max(4.5vw, 24px);
+    line-height: 1.1;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .header-contents p {
-    color: white;
+    color: var(--text-secondary);
     font-size: 1.2vw;
+    line-height: 1.6;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
 }
 
 .header-contents button {
-    padding: 1vw 2.3vw;
-    font-size: max(1.2vw, 16px);
-    background-color: white;
-    color: #747474;
+    /* Use variables for a premium look */
+    padding: 1.2vw 3vw;
+    font-size: max(1.1vw, 15px);
+    background: var(--text-primary);
+    color: var(--bg-color);
     border: none;
-    font-weight: 500;
+    font-weight: 600;
     border-radius: 50px;
     cursor: pointer;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
 
+.header-contents button:hover {
+    transform: translateY(-3px);
+    background: var(--accent-gradient);
+    color: white;
+    box-shadow: var(--shadow-accent);
 }
 
 @media(max-width: 1050px) {
     .header {
-        height: 38vw;
+        height: 42vw;
     }
-     .header-contents button {
-        margin-bottom: 5vw;
-    }
-
 }
 
 @media(max-width:750px) {
     .header-contents {
-        max-width: 75%;
+        max-width: 80%;
+        bottom: 10%;
     }
 
     .header-contents p {
@@ -61,8 +87,7 @@
     }
 
     .header-contents button {
-        padding: 2vw 4vw;
+        padding: 2.5vw 5vw;
         margin-bottom: 5vw;
     }
-    
 }

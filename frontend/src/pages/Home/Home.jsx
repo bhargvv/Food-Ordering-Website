@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './Home.css'
 import Header from '../../components/Header/Header';
 import ExploreMenu from '../../components/ExploreMenu/ExploreMenu';
 import FoodDisplay from '../../components/FoodDisplay/FoodDisplay';
-const Home = () => {
+import { StoreContext } from '../../context/StoreContext';
 
-  const [category,setCategory]= React.useState("All");
+const Home = () => {
+  const { searchQuery } = useContext(StoreContext);
+
+  const [category, setCategory] = React.useState("All");
 
   return (
     <div>
-      <Header/>
-      <ExploreMenu category={category} setCategory={setCategory} />
+      {!searchQuery && (
+        <>
+          <Header />
+          <ExploreMenu category={category} setCategory={setCategory} />
+        </>
+      )}
       <FoodDisplay category={category} />
     </div>
   )
