@@ -1,4 +1,4 @@
-import express from "express";
+import express from "express"; // Force restart
 import cors from "cors"
 import { connectDB } from "./config/db.js";
 import foodRouter from "./routes/foodRoute.js";
@@ -6,7 +6,6 @@ import userRouter from "./routes/userRoute.js";
 import 'dotenv/config'
 import cartRouter from "./routes/cartRoute.js";
 import orderRouter from "./routes/orderRoute.js";
-
 
 //app config
 const app= express();
@@ -34,8 +33,3 @@ app.get("/",(req,resp)=>{
 app.listen(port,()=>{
     console.log(`Server Started on http://localhost:${port}`)
 });
-
-
-//mongodb+srv://dbhargav03008_db_user:%40Bhargav123@cluster0.vwvvuul.mongodb.net/tastecart
-
-
