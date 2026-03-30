@@ -6,7 +6,7 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = (props) => {
 
     const [cartItems, setCartItems] = useState({});
-    const url = "http://localhost:4000"
+    const url = "https://food-ordering-website-1-7j9n.onrender.com"
     const [token, setToken] = useState("");
     const [food_list, setFoodList] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
