@@ -7,7 +7,9 @@ const Footer = () => {
             <div className="footer-content">
                 <div className="footer-content-left">
                     <img src={assets.logo} alt='' className="footer-logo" />
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum qui, esse, eligendi eaque quisquam ipsa reprehenderit saepe eos aspernatur odio quidem suscipit, facere officia harum eveniet! Ut neque quae ratione.</p>
+                    <p>TasteCart makes ordering your favorite food simple, fast, and convenient.
+                        Discover delicious dishes, explore our menu, and enjoy a smooth ordering experience.
+                        Fresh choices, easy ordering, and great taste — all in one place.</p>
                     <div className="footer-social-icons">
                         <div className="social-icon-wrapper"><img src={assets.facebook_icon} alt="" /></div>
                         <div className="social-icon-wrapper"><img src={assets.twitter_icon} alt="" /></div>
@@ -15,7 +17,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="footer-content-right">
-                    <h2>COMAPNY</h2>
+                    <h2>COMPANY</h2>
                     <ul>
                         <li>Home</li>
                         <li>About us</li>
@@ -26,8 +28,8 @@ const Footer = () => {
                 <div className="footer-content-right">
                     <h2>GET IN TOUCH</h2>
                     <ul>
-                        <li>+1-212-456-7890</li>
-                        <li>contact@tastecart.com</li>
+                        <li>+91 9110983012</li>
+                        <li>dbhargav030.08@gmail.com</li>
                     </ul>
 
                 </div>

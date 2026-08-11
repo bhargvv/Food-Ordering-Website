@@ -30,7 +30,7 @@ const AIChatWidget = () => {
         try {
             // Note: Update URL if backend URL context is available globally. 
             // We use localhost:4000 as defined in your setup.
-            const url = 'http://localhost:4000/api/chat';
+            const url = 'https://food-ordering-ai-assistant.onrender.com';
             const response = await fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
