@@ -28,9 +28,8 @@ const AIChatWidget = () => {
         setIsLoading(true);
 
         try {
-            // Note: Update URL if backend URL context is available globally. 
-            // We use localhost:4000 as defined in your setup.
-            const url = 'https://food-ordering-ai-assistant.onrender.com';
+            // Point to the Node.js Express backend which has the /api/chat route
+            const url = 'https://food-ordering-website-1-7j9n.onrender.com/api/chat';
             const response = await fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
