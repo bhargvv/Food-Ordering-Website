@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # MongoDB connection
-MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://dbhargav03008_db_user:177rnaehceUxVLBt@cluster0.vwvvuul.mongodb.net/tastecart")
+MONGO_URI = os.getenv("MONGO_URI")
 try:
     mongo_client = MongoClient(MONGO_URI)
     db = mongo_client.get_database() # Gets the database from the URI
