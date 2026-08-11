@@ -86,5 +86,8 @@ with gr.Blocks() as demo:
         textbox=gr.Textbox(placeholder="E.g., I have ₹150 and want something spicy...", container=False, scale=7)
     )
 
+import os
+
 if __name__ == "__main__":
-    demo.launch(server_port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    demo.launch(server_name="0.0.0.0", server_port=port)
