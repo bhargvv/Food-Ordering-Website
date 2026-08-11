@@ -6,10 +6,11 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = (props) => {
 
     const [cartItems, setCartItems] = useState({});
-    const url = "https://food-ordering-website-1-7j9n.onrender.com"
+    const url = "http://localhost:4000"
     const [token, setToken] = useState("");
     const [food_list, setFoodList] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
+    const [selectedFoodId, setSelectedFoodId] = useState(null);
 
     const addToCart = async (itemId) => {
         if (!cartItems[itemId]) {
@@ -81,7 +82,8 @@ const StoreContextProvider = (props) => {
         token,
         setToken,
         setShowLogin, showLogin,
-        searchQuery, setSearchQuery
+        searchQuery, setSearchQuery,
+        selectedFoodId, setSelectedFoodId
     }
     return (
         <StoreContext.Provider value={contextValue}>

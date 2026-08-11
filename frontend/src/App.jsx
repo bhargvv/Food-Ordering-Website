@@ -9,17 +9,20 @@ import './App.css'
 import LoginPopup from './components/LoginPopup/LoginPopup'
 import Verify from './pages/Verify/Verify'
 import Myorders from './pages/MyOrders/Myorders'
+import FoodDetails from './pages/FoodDetails/FoodDetails'
+import AIChatWidget from './components/AIChatWidget/AIChatWidget'
 import { StoreContext } from './context/StoreContext'
 import { useContext } from 'react'
 
 const App = () => {
 
   // const [showLogin, setShowLogin] = useState(false);
-    const { showLogin,setShowLogin } = useContext(StoreContext)
+    const { showLogin,setShowLogin, selectedFoodId } = useContext(StoreContext)
 
   return (
     <>
       {showLogin ? <LoginPopup setShowLogin={setShowLogin} /> : <></>}
+      {selectedFoodId ? <FoodDetails /> : <></>}
       <div className='app'>
         <Navbar setShowLogin={setShowLogin} />
         <Routes>
@@ -31,6 +34,7 @@ const App = () => {
         </Routes>
       </div>
       <Footer />
+      <AIChatWidget />
     </>
   )
 }

@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar/Navbar"
 import Sidebar from './components/Sidebar/Sidebar'
 import { Route, Routes } from 'react-router-dom'
 import Add from './pages/Add/Add'
+import Edit from './pages/Edit/Edit'
 import List from './pages/List/List'
 import Orders from './pages/Orders/Orders'
 import { ToastContainer } from 'react-toastify';
@@ -10,7 +11,7 @@ import { ToastContainer } from 'react-toastify';
 
 const App = () => {
 
-    const url = "https://food-ordering-website-1-7j9n.onrender.com"
+    const url = "http://localhost:4000"
 
   return (
     <div>
@@ -21,6 +22,7 @@ const App = () => {
         <Sidebar />
         <Routes>
           <Route path='/add' element={<Add url={url} />} />
+          <Route path='/edit/:id' element={<Edit url={url} />} />
           <Route path='/list' element={<List url={url} />} />
           <Route path='/orders' element={<Orders url={url} />} />
         </Routes>

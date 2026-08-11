@@ -12,7 +12,12 @@ const addFood = async (req, resp) => {
         description: req.body.description,
         price: req.body.price,
         category: req.body.category,
-        image: image_filename
+        image: image_filename,
+        ingredients: req.body.ingredients || "Not specified",
+        isVeg: req.body.isVeg === 'false' ? false : true,
+        rating: req.body.rating ? Number(req.body.rating) : 5,
+        preparationTime: req.body.preparationTime ? Number(req.body.preparationTime) : 30,
+        spiceLevel: req.body.spiceLevel || "Medium"
     })
     try{
         await food.save();
@@ -48,4 +53,53 @@ const removeFood = async (req,resp)=>{
     }
 }
 
-export { addFood,listFood,removeFood }
+// edit food item
+const editFood = async (req, resp) => {
+    console.log("Edit request received for ID:", req.body.id);
+    console.log("Request body:", req.body);
+    console.log("Request file:", req.file);
+
+    try {
+        let updateData = {
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price ? Number(req.body.price) : undefined,
+            category: req.body.category,
+            ingredients: req.body.ingredients,
+            isVeg: req.body.isVeg === 'false' ? false : true,
+            rating: req.body.rating ? Number(req.body.rating) : undefined,
+            preparationTime: req.body.preparationTime ? Number(req.body.preparationTime) : undefined,
+            spiceLevel: req.body.spiceLevel
+        };
+
+        // Remove undefined fields so they don't overwrite with undefined
+        Object.keys(updateData).forEach(key => {
+            if (updateData[key] === undefined) {
+                delete updateData[key];
+            }
+        });
+
+        if (req.file) {
+            updateData.image = req.file.filename;
+            let oldFood = await foodModel.findById(req.body.id);
+            if(oldFood && oldFood.image) {
+                fs.unlink(`uploads/${oldFood.image}`, () => {})
+            }
+        }
+
+        const result = await foodModel.findByIdAndUpdate(req.body.id, updateData, { new: true });
+        
+        if (!result) {
+            console.log("Food item not found for ID:", req.body.id);
+            return resp.json({ success: false, message: "Food item not found" });
+        }
+
+        console.log("Successfully updated food item:", result);
+        resp.json({ success: true, message: "Food Updated" });
+    } catch (error) {
+        console.error("Error updating food item:", error);
+        resp.json({ success: false, message: "Error updating food item" });
+    }
+}
+
+export { addFood, listFood, removeFood, editFood }

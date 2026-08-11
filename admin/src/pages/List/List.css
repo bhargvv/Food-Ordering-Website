@@ -7,6 +7,11 @@
     border: 1px solid #cacaca;
     font-size: 13px;
 }
+.list-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
 .list-table-format.title{
     background-color: #f9f9f9;
 }
